@@ -1,70 +1,92 @@
-import { Image, StyleSheet, Platform } from 'react-native';
+import { View, Text, StyleSheet, Image, Platform } from 'react-native';
+import React from 'react';
 
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
-
-export default function HomeScreen() {
+export default function HomeScreen({ navigation }) {
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({ ios: 'cmd + d', android: 'cmd + m' })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+    <View style={styles.homePage}>
+      <View style={styles.textContainer}>
+        <View style={styles.wrapper}>
+          <View style={styles.logoContainer}>
+            <Image source={require("../../public/logo.png")} style={styles.logoImage} />
+          </View>
+          <Text style={styles.title}>Welcome to EV CONNECT</Text>
+          <Text style={styles.description}>
+            Your Ultimate EV Charging Companion
+            {"\n"}The simplest way to power up your electric journey! Our mission is to make charging your EV as seamless as possible, whether you're at home, at work, or on the go!
+          </Text>
+        </View>
+      </View>
+      <View style={styles.imgContainer}>
+        <Image source={require("../../public/bg.png")} style={styles.backgroundImage} />
+      </View>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
+  homePage: {
+    flex: 1,
+    backgroundColor: "#f5f6fa", // Light modern background
+    paddingVertical: 20,
+    paddingHorizontal: 25,
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  textContainer: {
+    flex: 2,
+    justifyContent: "center",
+    paddingHorizontal: 20,
+    backgroundColor: "#ffffff",
+    borderRadius: 15,
+    paddingVertical: 30,
+    shadowColor: "#000",
+    shadowOpacity: 0.08,
+    shadowOffset: { width: 0, height: 4 },
+    shadowRadius: 10,
+    elevation: 4,
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  wrapper: {
+    alignItems: "center",
+  },
+  logoContainer: {
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 10,
+  },
+  logoImage: {
+    width: 200,   // Increased width
+    height: 150,  // Increased height
+    resizeMode: "contain",
+    borderRadius: 75,  // Keep rounded appearance with updated size
+  },
+  
+  title: {
+    fontSize: 26,
+    fontWeight: "700",
+    textAlign: "center",
+    color: "#1e3a8a", // Modern muted blue
+    marginBottom: 10,
+  },
+  description: {
+    fontSize: 17,
+    textAlign: "center",
+    color: "#4b5563", // Soft gray for readability
+    lineHeight: 24,
+    paddingHorizontal: 15,
+  },
+  imgContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 20,
+  },
+  backgroundImage: {
+    width: "100%",
+    height: Platform.OS === "ios" ? 250 : 220, // Adjust background height based on platform
+    resizeMode: "cover",
+    borderRadius: 12,
+    shadowColor: "#000",
+    shadowOpacity: 0.05,
+    shadowOffset: { width: 0, height: 3 },
+    shadowRadius: 10,
   },
 });
+
